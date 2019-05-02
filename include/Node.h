@@ -19,6 +19,8 @@ private:
     
 public:
     Node();
+
+    ~Node();
     
     Node( T );
     
@@ -41,6 +43,12 @@ public:
 template<typename T>
 Node<T>::Node(void):
 next(NULL) {}
+
+template<typename T>
+Node<T>::~Node(void)
+{
+    //Destrutor Padrao
+}
 
 template<typename T>
 Node<T>::Node(T val):

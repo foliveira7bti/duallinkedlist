@@ -137,14 +137,33 @@ bool LinkedList::insertEnd(string s)
 
 bool LinkedList::insert(int i, string s)
 {
-    std::cout << "\tERRO - Método insert ainda não foi implementado.\n";
-    return false;
+	Node<string>* novo = new Node<string>(s);
+    int cont = 0;
+    bool inseriu = false;
+    for(Node<string>* n = head->getNext(); n!= tail; n = n->getNext())
+    {
+    	if (i == cont)
+    	{
+    		n->getPrevious()->setNext(novo);
+    		novo->setPrevious(n->getPrevious());
+    		n->setPrevious(novo);
+    		novo->setNext(n);
+    		++this->quantity;
+    		inseriu = true;
+    	}
+    	cont++;
+    }
+    return inseriu;
+    //std::cout << "\tERRO - Método insert ainda não foi implementado.\n";
+    //return false;
 }
 
 void LinkedList::unlink(Node<string>* a)
 {
 	a->getPrevious()->setNext(a->getNext());
     a->getNext()->setPrevious(a->getPrevious());
+    a->setPrevious(nullptr);
+    a->setNext(nullptr);
 }
 
 string LinkedList::removeEnd(void)
@@ -175,7 +194,21 @@ string LinkedList::removeBegin(void)
 
 string LinkedList::remove(int indice)
 {
-    std::cout << "\tERRO - Método remove ainda não foi implementado.\n";
+	string valorRemovido;
+	int cont = 0;
+	for(Node<string>* novo = head->getNext(); novo != tail; novo->getNext())
+	{
+		if (indice == cont)
+		{
+			valorRemovido = novo->getValue();
+			unlink(novo);
+			delete novo;
+			--this->quantity;
+			return valorRemovido;
+		}
+	cont++;
+	}
+    //std::cout << "\tERRO - Método remove ainda não foi implementado.\n";
     return "";
 }
 

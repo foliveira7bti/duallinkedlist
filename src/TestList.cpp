@@ -154,13 +154,13 @@ bool test_Insert()
     
     lista->insert( 1, v[0] );
     
-    for(int i = 1; i < 10; i++)
+    for(int i = 0; i < 10; i++)
     {
         int tamanhoAntes = lista->getQuantity();
         
         string valorInserido = v[i];
         
-        int indice = i % 2 == 0 ? 2 : 1;
+        //int indice = i % 2 == 0 ? 2 : 1;
         
         ListStatus verificada = lista->checkConsistency();
         if( verificada != OK )
@@ -170,7 +170,7 @@ bool test_Insert()
             break;
         }
         
-        bool inseriu = lista->insert(indice, valorInserido);
+        bool inseriu = lista->insert(i, valorInserido);
         if( !inseriu )
         {
             cerr << "\tERRO - Teste Insert: não inseriu elemento na lista corretamente." << endl;
@@ -178,11 +178,11 @@ bool test_Insert()
             break;
         }
         
-        string valorRetornado = lista->get(indice);
+        string valorRetornado = lista->get(i);
         
         if( valorRetornado != valorInserido )
         {
-            cerr << "\tERRO - Teste Insert: valor inserido na posição " << indice << " foi '" << valorInserido << "' e o valor retornado desta posição foi " << valorRetornado << endl;
+            cerr << "\tERRO - Teste Insert: valor inserido na posição " << i << " foi '" << valorInserido << "' e o valor retornado desta posição foi " << valorRetornado << endl;
             resultado = false;
             break;
         }
